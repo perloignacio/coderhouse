@@ -1,0 +1,152 @@
+[
+    {
+        "Nombre":"Departamento en córdoba",
+        "Foto":"foto1.webp",
+        "Habitaciones":1,
+        "Camas":1,
+        "Banios":1,
+        "Calificaciones":4.5,
+        "Precio":7500,
+        "Huespedes":2,
+        "Lat":-31.419024645103114,
+        "Lng":-64.19706295200807,
+        "Patio:":0,
+        "Tipo":"DEPARTAMENTOS",
+        "Reservas":[]
+    },
+    {
+        "Nombre":"Loft en córdoba",
+        "Foto":"foto2.webp",
+        "Habitaciones":2,
+        "Camas":2,
+        "Banios":2,
+        "Calificaciones":2.5,
+        "Precio":9500,
+        "Huespedes":4,
+        "Lat":-31.42126488862058,
+        "Lng":-64.18773744607653,
+        "Patio:":0,
+        "Tipo":"DEPARTAMENTOS",
+        "Reservas":[
+            {
+                "Desde":"2022-05-01",
+                "Hasta":"2022-05-05"
+            },
+            {
+                "Desde":"2022-05-07",
+                "Hasta":"2022-05-10"
+            }
+        ]
+    },
+    {
+        "Nombre":"Departamento en compejo residencial",
+        "Foto":"foto3.webp",
+        "Habitaciones":2,
+        "Camas":3,
+        "Banios":2,
+        "Calificaciones":5,
+        "Precio":10500,
+        "Huespedes":4,
+        "Lat":-31.417303215089756, 
+        "Lng":-64.19577391776365,
+        "Patio:":0,
+        "Tipo":"DEPARTAMENTOS",
+        "Reservas":[]
+    },
+    {
+        "Nombre":"Dpto en córdoba",
+        "Foto":"foto4.webp",
+        "Habitaciones":1,
+        "Camas":1,
+        "Banios":1,
+        "Calificaciones":3.5,
+        "Precio":5500,
+        "Huespedes":2,
+        "Lat":-31.417031604724812, 
+        "Lng":-64.18472538409003,
+        "Patio:":0,
+        "Tipo":"DEPARTAMENTOS",
+        "Reservas":[
+            {
+                "Desde":"2022-05-07",
+                "Hasta":"2022-05-10"
+            },{
+                "Desde":"2022-05-11",
+                "Hasta":"2022-05-15"
+            }
+        ]
+    },
+    {
+        "Nombre":"Casa en córdoba",
+        "Foto":"foto5.webp",
+        "Habitaciones":3,
+        "Camas":4,
+        "Banios":3,
+        "Calificaciones":4.5,
+        "Precio":15500,
+        "Huespedes":6,
+        "Lat":-31.423645955641025,
+        "Lng":-64.19476783040031,
+        "Patio:":1,
+        "Tipo":"CASAS",
+        "Reservas":[
+            
+        ]
+    },
+    {
+        "Nombre":"Apartamento en córdoba",
+        "Foto":"foto6.webp",
+        "Habitaciones":1,
+        "Camas":1,
+        "Banios":1,
+        "Calificaciones":3.5,
+        "Precio":4500,
+        "Huespedes":2,
+        "Lat":-31.41939366474908, 
+        "Lng":-64.19566031274509,
+        "Patio:":0,
+        "Tipo":"DEPARTAMENTOS",
+        "Reservas":[
+            {
+                "Desde":"2022-05-07",
+                "Hasta":"2022-05-10"
+            },{
+                "Desde":"2022-05-11",
+                "Hasta":"2022-05-15"
+            }
+        ]
+    },
+    {
+        "Nombre":"Hotel interplaza",
+        "Foto":"foto7.webp",
+        "Habitaciones":1,
+        "Camas":1,
+        "Banios":1,
+        "Calificaciones":4.0,
+        "Precio":6500,
+        "Huespedes":2,
+        "Lat":-31.425488546001638,
+        "Lng": -64.19724523214744, 
+        "Patio:":0,
+        "Tipo":"HOTELES",
+        "Reservas":[
+        ]
+    },
+    {
+        "Nombre":"Apart Hotel 'El ceibo'",
+        "Foto":"foto8.webp",
+        "Habitaciones":1,
+        "Camas":1,
+        "Banios":1,
+        "Calificaciones":2.0,
+        "Precio":3500,
+        "Huespedes":2,
+        "Lat":-31.421738155109157,
+        "Lng": -64.18754388079107,
+        "Patio:":0,
+        "Tipo":"APART HOTEL",
+        "Reservas":[
+        ]
+    }
+
+]
