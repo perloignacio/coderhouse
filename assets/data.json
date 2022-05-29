@@ -1,5 +1,6 @@
 [
     {
+        "IdUnidad":1,
         "Nombre":"Departamento en córdoba",
         "Foto":"foto1.webp",
         "Habitaciones":1,
@@ -15,6 +16,7 @@
         "Reservas":[]
     },
     {
+        "IdUnidad":2,
         "Nombre":"Loft en córdoba",
         "Foto":"foto2.webp",
         "Habitaciones":2,
@@ -29,16 +31,19 @@
         "Tipo":"DEPARTAMENTOS",
         "Reservas":[
             {
-                "Desde":"2022-05-01",
-                "Hasta":"2022-05-05"
+                "Desde":"2022-05-29",
+                "Hasta":"2022-06-05",
+                "Pax:":2
             },
             {
-                "Desde":"2022-05-07",
-                "Hasta":"2022-05-10"
+                "Desde":"2022-06-07",
+                "Hasta":"2022-06-10",
+                "Pax:":4
             }
         ]
     },
     {
+        "IdUnidad":3,
         "Nombre":"Departamento en compejo residencial",
         "Foto":"foto3.webp",
         "Habitaciones":2,
@@ -54,6 +59,7 @@
         "Reservas":[]
     },
     {
+        "IdUnidad":4,
         "Nombre":"Dpto en córdoba",
         "Foto":"foto4.webp",
         "Habitaciones":1,
@@ -69,14 +75,17 @@
         "Reservas":[
             {
                 "Desde":"2022-05-07",
-                "Hasta":"2022-05-10"
+                "Hasta":"2022-05-10",
+                "Pax:":2
             },{
                 "Desde":"2022-05-11",
-                "Hasta":"2022-05-15"
+                "Hasta":"2022-05-15",
+                "Pax:":1
             }
         ]
     },
     {
+        "IdUnidad":5,
         "Nombre":"Casa en córdoba",
         "Foto":"foto5.webp",
         "Habitaciones":3,
@@ -94,6 +103,7 @@
         ]
     },
     {
+        "IdUnidad":6,
         "Nombre":"Apartamento en córdoba",
         "Foto":"foto6.webp",
         "Habitaciones":1,
@@ -109,14 +119,17 @@
         "Reservas":[
             {
                 "Desde":"2022-05-07",
-                "Hasta":"2022-05-10"
+                "Hasta":"2022-05-10",
+                "Pax:":1
             },{
                 "Desde":"2022-05-11",
-                "Hasta":"2022-05-15"
+                "Hasta":"2022-05-15",
+                "Pax:":1
             }
         ]
     },
     {
+        "IdUnidad":7,
         "Nombre":"Hotel interplaza",
         "Foto":"foto7.webp",
         "Habitaciones":1,
@@ -133,6 +146,7 @@
         ]
     },
     {
+        "IdUnidad":8,
         "Nombre":"Apart Hotel 'El ceibo'",
         "Foto":"foto8.webp",
         "Habitaciones":1,

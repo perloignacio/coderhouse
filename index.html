@@ -43,10 +43,11 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item mx-0 mx-lg-1"><span role="button" class="ps-2" onclick="agregarFiltro('Tipo','CASAS')">CASAS</span></li>
-                            <li class="nav-item mx-0 mx-lg-1"><span role="button" class="ps-2" onclick="agregarFiltro('Tipo','HOTELES')">HOTELES</span></li>
-                            <li class="nav-item mx-0 mx-lg-1"><span role="button" class="ps-2" onclick="agregarFiltro('Tipo','DEPARTAMENTOS')">DEPARTAMENTOS</span></li>
-                            <li class="nav-item mx-0 mx-lg-1"><span role="button" class="ps-2" onclick="agregarFiltro('Tipo','APART HOTEL')">APART HOTEL</span></li>
+                            <li class="nav-item mx-0 mx-lg-1"><span role="button" class="ps-2" id="btnCasas">CASAS</span></li>
+                            <li class="nav-item mx-0 mx-lg-1"><span role="button" class="ps-2" id="btnHoteles">HOTELES</span></li>
+                            <li class="nav-item mx-0 mx-lg-1"><span role="button" class="ps-2" id="bntDepartamentos">DEPARTAMENTOS</span></li>
+                            <li class="nav-item mx-0 mx-lg-1"><span role="button" class="ps-2" id="btnApart">APART HOTEL</span></li>
+                            <li class="nav-item mx-0 mx-lg-1"><span role="button" class="ps-2" id="misReservas">| MIS RESERVAS</span></li>
                         </ul>
                     </div>
                 
@@ -54,6 +55,7 @@
         </nav>
         <div class="buscador">
             <div class="container">
+                
                 <div class="col-md-8 offset-md-2">
                     <div class="filtro">
                         <div class="row">
@@ -77,25 +79,85 @@
                             </div>
                             <div class="col-md-3">
                                 
-                                <button onclick="buscar()" class="btn btn-primary w-100">BUSCAR</button>
+                                <button id="btnBuscar" class="btn btn-primary w-100">BUSCAR</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <h5 class="resultados"></h5>
-                    <div class="filtros">
+                    <h5 id="resultados"></h5>
+                    <div id="filtros">
 
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="listado"></div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="card p-2">
+                                <label>Baños</label>
+                                <select id="banio" class="form-control form-select  ">
+                                    <option value="0">Sin especificar</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card p-2">
+                                <label>Habitaciones</label>
+                                <select id="habitaciones" class="form-control form-select   ">
+                                    <option value="0">Sin especificar</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card p-2">
+                                <label>Camas</label>
+                                <select id="camas" class="form-control form-select   ">
+                                    <option value="0">Sin especificar</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card p-2">
+                                <label>Califiacaciones</label>
+                                <select id="califiacaciones" class="form-control form-select   ">
+                                    <option value="0">Sin especificar</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="listado"></div>
                 </div>
                 <div class="col-md-6">
                     <div id="googleMap"></div>
@@ -123,11 +185,22 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet"> 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://momentjs.com/downloads/moment.min.js"></script>
+        
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=xxx&callback=initMap"></script>
-       
-       
+        <script type="module" src="js/scripts.js"></script>
+        
+        <script>
+            function initMap() {
+                let mapProp= {
+                center:new google.maps.LatLng(-31.4168582,-64.1720676,),
+                zoom:12,
+                };
+                map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg8BmxqFCCKSEdoT7JQXXM5zDHqrIkx0g&callback=initMap"></script>
         
         
         

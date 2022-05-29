@@ -14,5 +14,5 @@
 .card p{font-weight: 300;}
 .card .info{padding: 0px 10px;}
 
-.filtros{margin-bottom: 30px;}
-.filtros .fl{display: inline-block;background-color: #f4f4f4 !important; padding: 7px; border-radius: 10px;font-size: 11px;font-weight: 300;}
+#filtros{margin-bottom: 30px;}
+#filtros .fl{display: inline-block;background-color: #f4f4f4 !important; padding: 7px; border-radius: 10px;font-size: 11px;font-weight: 300;}
