@@ -160,7 +160,13 @@
                     <div id="listado"></div>
                 </div>
                 <div class="col-md-6">
-                    <div id="googleMap"></div>
+                    <div class="content_map">
+                        <div class="loading">
+                            <i class="fa fa-spinner fa-spin spin"></i>
+                        </div>
+                        <div id="googleMap"></div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -191,16 +197,8 @@
         <!-- Core theme JS-->
         <script type="module" src="js/scripts.js"></script>
         
-        <script>
-            function initMap() {
-                let mapProp= {
-                center:new google.maps.LatLng(-31.4168582,-64.1720676,),
-                zoom:12,
-                };
-                map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-            }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg8BmxqFCCKSEdoT7JQXXM5zDHqrIkx0g&callback=initMap"></script>
+        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg8BmxqFCCKSEdoT7JQXXM5zDHqrIkx0g"></script>
         
         
         

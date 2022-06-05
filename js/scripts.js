@@ -1,10 +1,20 @@
 
+/*La idea de este codigo es simular un sitio de reservas de estadias. Los datos que se ingresan en el buscador son los que se
+toman para "reservar", esto es asi para lograr simular la funcionalidad. 
+Se implementa una clase reservas la cual tiene 2 metodos, reservar y anular, los datos de las reservas se almacenan en localstorage
+Se puede realziar filtros de unidades por tipologia, cantidad de habitaciones / camas. Cantidade baños, cantidad de personas. 
+Los filtros son acumulativos
+*/
 import reservas from './reservas.js';
+
 let initData;
 let filtros=[];
 let map;
-
+let markersArray=[];
+let infowindow = new google.maps.InfoWindow();
+/*obtenemos el json simulado de hospedajes disponibles*/
 function getData(){
+    initMap();
     fetch("../assets/data.json")
         .then(response => {
             return response.json();
@@ -13,10 +23,16 @@ function getData(){
             initData=jsondata;
             renderData(initData);
             
+        }).catch(reject=>{
+            Swal.fire("upps","Ocurrio un error al obtener los datos");
         });
+    
 
 }
+
+/*Renderizamos el contenido del json*/
 function renderData(datos){
+    document.getElementsByClassName("loading")[0].classList.remove("oculto")
     document.getElementById("listado").innerHTML="";
     let html="<div class='row'>";
     for(let i=0;i<=datos.length-1;i++){
@@ -51,8 +67,13 @@ function renderData(datos){
     document.getElementById("resultados").innerText=`Se encontraron ${datos.length} resultados`;
     document.getElementById("listado").innerHTML=html;
     bindClickReserva();
+    
+    AgregaMarkers(datos).then(res=>{
+       document.getElementsByClassName("loading")[0].classList.add("oculto")
+    })
 }
 
+/*Cada card, contiene un boton reserva, cada vez que se renderiza el lista, se asocia el boton con la funcion reserva*/
 function bindClickReserva(){
     initData.forEach((element) => {
         
@@ -67,6 +88,8 @@ function bindClickReserva(){
     });
 }
 
+/*Para el caso de "mis reservas", en vez de poder reservar, lo que se puede realizar es Anular una reserva, 
+desde este metodo se asocia el click del boton anular y la funcion anular */
 function bindClickAnular(){
     initData.forEach((element) => {
         
@@ -80,12 +103,16 @@ function bindClickAnular(){
         
     });
 }
+
+/*Se intancia al metodo anular de la clase reservas, el mismo limpia la posicion del array de reservas almacenados en local storage */
 function Anular(element){
     let reserva=new reservas();
     reserva.Anular(element);
     Swal.fire('Ok','Muchas gracias, su reserva se cancelo correctamente','success');
     renderMisReservas();
 }
+/*Se intancia al metodo reservar de la clase reservas, el mismo agrega una posicion al array de reservas almacenados en local storage, 
+siempre y cuando se cumplan con ciertas validaciones. */
 function Reservar(unidad){
     if(Validar(unidad)){
         let fdesde=moment(document.getElementById("desde").value);
@@ -97,6 +124,9 @@ function Reservar(unidad){
     }
     
 }
+/*Validamos los valores de fecha desde, hasta, cantidad de personas. y por otro lado validamos la disponibilidad de la unidad 
+tomando los datos del json, simulando resrvas generadas por otro usuario, y las de local storage, simulando mis reservas */
+
 function Validar(element){
     var hoy=new moment();
     if(document.getElementById("desde").value==""){
@@ -150,6 +180,8 @@ function Validar(element){
 
     return true;
 }
+
+/*Funcion para validar la disponiblidad de la unidad */
 function checkDisponibilidad(IdUnidad,listado,fdesde,fhasta){
     let band=true;
     listado.filter(l=>l.IdUnidad==IdUnidad).forEach(r=>{
@@ -169,16 +201,20 @@ function checkDisponibilidad(IdUnidad,listado,fdesde,fhasta){
     return band;
     
 }
+/*Esta funcion podria haber estado en la clase reservas, pero me parecio que no era de su scope por lo que la deje a nivel global. */
 function misReservas(){
     return JSON.parse(localStorage.getItem("reservas")) ?? [];
 }
 
+/*Cada vez que se hace click en la tipologia de la unidad o se cambia algun valor, se llama a esta funcion, la idea fue la de crear 
+una especie de diccionario clave, valor para luego filtrar por dicho diccionario */
 function agregarFiltro(k,v){
     checkFiltrosAplicados(k,v);
     renderFiltros();
    
     filtrar();
 }
+/*Se asocia el comportamiento de la "cruz" de cada filtro con el metodo que retira el filtro del listado. */
 function bindQuitarFiltros(){
     for(let i=0;i<=filtros.length-1;i++){
         let card=document.getElementById(`fl${i}`);
@@ -190,6 +226,9 @@ function bindQuitarFiltros(){
         })  
     }
 }
+
+/*En base al diccionario hacemos un switch, al ser controlado por la pantalla, no es necesario pasarlo a min / may ya que sabes de antemano
+el formato en el que va a venir, y realizamos un filtro del array obtenido en el json y llamamos a la funcion de renderizar resultados. */
 function filtrar(){
     let data=initData;
     for(let i=0;i<=filtros.length-1;i++){
@@ -219,6 +258,7 @@ function filtrar(){
     renderData(data); 
 }
 
+/* Esta funcion es para el caso en el que ya tenga en el diccionario la clave, por lo tanto en dicho caso solo actualizo valor */
 function checkFiltrosAplicados(k,v){
     let Agregar=true;
     for(let i=0;i<=filtros.length-1;i++){
@@ -233,6 +273,8 @@ function checkFiltrosAplicados(k,v){
         filtros.push(dict);
     }
 }
+
+/* En base al array de filtros aplicados, se renderizan para que el usuario pueda visualizar / quitar filtros */
 function renderFiltros(){
     let html="";
     
@@ -245,24 +287,76 @@ function renderFiltros(){
     document.getElementById("filtros").innerHTML=html;
     bindQuitarFiltros();
 }
+
+/* Borrar del array de filtros el seleccionado por el usuario */
 function quitarFiltro(index){
     filtros.splice(index,1);
     renderFiltros();
     filtrar();
 }
+
+/* Solo se agrega el filtro por cantidad de pasajeros, la disponiblidad se valida, no se filtra */
 function buscar(){
     if(document.getElementById("pasajeros").value!=0){
         agregarFiltro("Huespedes",document.getElementById("pasajeros").value);
     }
-    if(document.getElementById("desde").value!="" && document.getElementById("hasta").value!=""){
-        agregarFiltro("Fecha",`${document.getElementById("desde").value} - ${document.getElementById("hasta").value}`);
-        
-    }
+    
     
    
 }
+
+
+/*Inicializa el mapa en la ciudad de cordoba*/
+function initMap() {
+    let mapProp= {
+    center:new google.maps.LatLng(-31.4168582,-64.1720676),
+    zoom:12,
+    
+    };
+    map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+}
+
+/*Realizamos una promesa para que cada vez que se actualice el listado se marquen en el mapa las ubicaciones de los establecimientos.
+Ponemos un timeout a modo de simulacion de una carga de contenidos*/
+const AgregaMarkers = (datos) => new Promise((resolve, reject) => {
+    limpiaMarkers();
+    for(let i=0;i<=datos.length-1;i++){
+        addMarker(new google.maps.LatLng(datos[i].Lat,datos[i].Lng),datos[i].Nombre,i)
+    }
+    setTimeout(() => {
+        resolve({
+            error: false,     
+          });
+    }, 2000);
+    
+});
+
+/*Limpiamos los puntos previamente marcados.*/
+function limpiaMarkers(){
+    for (var i = 0; i < markersArray.length; i++ ) {
+        markersArray[i].setMap(null);
+    }
+}
+/*Funcion que agrega los puntos al mapa.*/
+function addMarker(location,nombre,i) {
+     let marker = new google.maps.Marker({
+        position:location,
+        map: map
+        
+    });
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(nombre);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    markersArray.push(marker);
+}
+/* llamada al metodo que da inicio a la pantalla */
 getData();
 
+/* Renderiza las reservas realizadas por el usuario, mostrando la fecha desde / hasta que indico mas la cantidad de pasajeros. 
+El usuario puede cancelar una reserva */
 function renderMisReservas(){
     let reservas=misReservas();
     document.getElementById("listado").innerHTML="";
@@ -304,6 +398,8 @@ function renderMisReservas(){
     document.getElementById("listado").innerHTML=html;
     bindClickAnular();
 }
+
+/* Bindeamos los botones del sitio*/
 document.getElementById("btnBuscar").addEventListener("click",buscar);
 document.getElementById("btnCasas").addEventListener("click",()=>{
     agregarFiltro("Tipo","CASAS")
@@ -347,4 +443,4 @@ document.getElementById("califiacaciones").addEventListener("change",()=>{
     }    
 });
 document.getElementById("misReservas").addEventListener("click",renderMisReservas);
-
+/*---*/ 

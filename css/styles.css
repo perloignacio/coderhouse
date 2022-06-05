@@ -6,7 +6,11 @@
 .buscador{position: relative;top:-40px;}
 .buscador .filtro{background-color: #fff;padding: 20px 30px; border-radius: 50px;-webkit-box-shadow: 0px 0px 20px -2px #000000; 
   box-shadow: 0px 0px 20px -2px #000000;}
-#googleMap{width: 100%; height: 600px;}
+.content_map{position: relative;}
+.content_map .loading{background-color: rgba(0, 0, 0, 0.5);width: 100%;height: 600px;position: absolute;z-index: 1000000;text-align: center;}
+.content_map .loading .spin{color:#fff;top: 40%;position: relative; font-size: 80px;}
+.content_map .loading.oculto{display: none;}
+.content_map #googleMap{width: 100%; height: 600px;}
 .resultados{font-size: 16px;font-weight: 700;margin-bottom: 20px;}
 .card{border: 0px !important;margin-bottom: 50px;background-color: #f4f4f4 !important;border-radius: 10px !important;}
 .card .foto{height: 307px;width: 100%;background-position: center;background-size: cover;border-radius: 10px 10px 0px 0px; margin-bottom: 20px;}
